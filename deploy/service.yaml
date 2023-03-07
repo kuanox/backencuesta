@@ -1,0 +1,23 @@
+# Service configuration
+# You can configure the service exposure here
+# be-serviceName for BackEnd, acl-serviceName for BackendForFrontend, dal-serviceName for Data Abstraction Layer
+apiVersion: v1
+kind: Service
+metadata:
+  # Normal service name
+  name: back-encuesta-service
+spec:
+  ports:
+  - port: 8080
+    # 8080 normal service, 8081 service with endpoints
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    # Normal service name and tier
+    app: back-encuesta
+    # backend, frontend
+    tier: backend
+  # LOCAL/INTERNAL: NodePort, GCP/EXTERNAL: LoadBalancer
+  type: LoadBalancer
+---
